@@ -1,16 +1,17 @@
 import { useState, useEffect } from "react";
+import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { 
   BookOpen, 
   Calendar, 
   FileText, 
   Megaphone, 
-  Heart, 
   Settings, 
   Moon, 
   Sun,
   Menu,
-  X
+  X,
+  GraduationCap
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -18,6 +19,7 @@ const Navigation = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isDarkMode, setIsDarkMode] = useState(false);
+  const location = useLocation();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -34,37 +36,43 @@ const Navigation = () => {
   };
 
   const navItems = [
-    { icon: BookOpen, label: "Courses", href: "#courses" },
-    { icon: Calendar, label: "Timetable", href: "#timetable" },
-    { icon: FileText, label: "Resources", href: "#resources" },
-    { icon: Megaphone, label: "Announcements", href: "#announcements" },
-    { icon: Heart, label: "Favorites", href: "#favorites" },
-    { icon: Settings, label: "Admin", href: "#admin" },
+    { icon: BookOpen, label: "Courses", href: "/courses" },
+    { icon: Calendar, label: "Timetable", href: "/timetable" },
+    { icon: FileText, label: "Resources", href: "/resources" },
+    { icon: Megaphone, label: "Announcements", href: "/#announcements" },
+    { icon: Settings, label: "Admin", href: "/admin" },
   ];
+
+  const isActive = (href: string) => {
+    if (href === "/#announcements") {
+      return location.pathname === "/" && location.hash === "#announcements";
+    }
+    return location.pathname === href;
+  };
 
   return (
     <nav 
       className={cn(
         "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
         isScrolled 
-          ? "glass-nav shadow-glass py-2" 
+          ? "bg-white/95 backdrop-blur-md shadow-lg py-2" 
           : "bg-transparent py-4"
       )}
     >
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between">
           {/* Logo */}
-          <div className="flex items-center space-x-3">
-            <div className="w-10 h-10 gradient-primary rounded-xl flex items-center justify-center shadow-float">
-              <Heart className="w-6 h-6 text-white" />
+          <Link to="/" className="flex items-center space-x-3">
+            <div className="w-10 h-10 bg-primary rounded-xl flex items-center justify-center shadow-lg">
+              <GraduationCap className="w-6 h-6 text-white" />
             </div>
             <div className="hidden md:block">
-              <h1 className="text-xl font-bold bg-gradient-primary bg-clip-text text-transparent">
+              <h1 className="text-xl font-bold text-gray-900">
                 Faculty of Medicine
               </h1>
-              <p className="text-xs text-muted-foreground">University of Béjaïa</p>
+              <p className="text-xs text-gray-600">University of Béjaïa</p>
             </div>
-          </div>
+          </Link>
 
           {/* Desktop Navigation */}
           <div className="hidden lg:flex items-center space-x-1">
@@ -73,13 +81,16 @@ const Navigation = () => {
                 key={item.label}
                 variant="ghost"
                 size="sm"
-                className="glass-card-hover text-foreground hover:text-primary"
+                className={cn(
+                  "text-gray-700 hover:text-primary hover:bg-primary/5",
+                  isActive(item.href) && "text-primary bg-primary/5"
+                )}
                 asChild
               >
-                <a href={item.href} className="flex items-center space-x-2">
+                <Link to={item.href} className="flex items-center space-x-2">
                   <item.icon className="w-4 h-4" />
                   <span>{item.label}</span>
-                </a>
+                </Link>
               </Button>
             ))}
           </div>
@@ -91,7 +102,7 @@ const Navigation = () => {
               variant="ghost"
               size="sm"
               onClick={toggleDarkMode}
-              className="glass-card-hover w-10 h-10 p-0"
+              className="w-10 h-10 p-0 text-gray-700 hover:text-primary hover:bg-primary/5"
             >
               {isDarkMode ? (
                 <Sun className="w-4 h-4" />
@@ -102,7 +113,7 @@ const Navigation = () => {
 
             {/* Login button */}
             <Button 
-              className="hidden md:inline-flex gradient-primary shadow-float hover:shadow-glass-lg transition-all duration-300"
+              className="hidden md:inline-flex bg-primary hover:bg-primary/90 text-white shadow-lg"
             >
               Sign In
             </Button>
@@ -111,7 +122,7 @@ const Navigation = () => {
             <Button
               variant="ghost"
               size="sm"
-              className="lg:hidden glass-card-hover w-10 h-10 p-0"
+              className="lg:hidden w-10 h-10 p-0 text-gray-700 hover:text-primary"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             >
               {isMobileMenuOpen ? (
@@ -125,24 +136,27 @@ const Navigation = () => {
 
         {/* Mobile Menu */}
         {isMobileMenuOpen && (
-          <div className="lg:hidden mt-4 glass-card rounded-2xl p-4 animate-slide-up">
+          <div className="lg:hidden mt-4 bg-white rounded-2xl p-4 animate-slide-up shadow-lg border border-gray-100">
             <div className="flex flex-col space-y-2">
               {navItems.map((item) => (
                 <Button
                   key={item.label}
                   variant="ghost"
-                  className="justify-start text-foreground hover:text-primary"
+                  className={cn(
+                    "justify-start text-gray-700 hover:text-primary hover:bg-primary/5",
+                    isActive(item.href) && "text-primary bg-primary/5"
+                  )}
                   asChild
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
-                  <a href={item.href} className="flex items-center space-x-3">
+                  <Link to={item.href} className="flex items-center space-x-3">
                     <item.icon className="w-4 h-4" />
                     <span>{item.label}</span>
-                  </a>
+                  </Link>
                 </Button>
               ))}
               <Button 
-                className="gradient-primary shadow-float justify-start mt-4"
+                className="bg-primary hover:bg-primary/90 text-white justify-start mt-4"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 Sign In
