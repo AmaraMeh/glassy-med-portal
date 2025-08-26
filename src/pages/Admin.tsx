@@ -70,43 +70,43 @@ const Admin = () => {
   ];
 
   const recentActivities = [
-    { id: 1, action: "New course added", user: "Dr. Sarah Johnson", time: "2 minutes ago", type: "course" },
-    { id: 2, action: "Resource uploaded", user: "Dr. Michael Chen", time: "15 minutes ago", type: "resource" },
-    { id: 3, action: "Announcement published", user: "Admin", time: "1 hour ago", type: "announcement" },
-    { id: 4, action: "User registered", user: "Student Portal", time: "2 hours ago", type: "user" },
-    { id: 5, action: "System backup completed", user: "System", time: "3 hours ago", type: "system" }
+    { id: 1, action: "New programming course added", user: "Dr. Sarah Johnson", time: "2 minutes ago", type: "course" },
+    { id: 2, action: "Software development resource uploaded", user: "Dr. Michael Chen", time: "15 minutes ago", type: "resource" },
+    { id: 3, action: "Tech workshop announcement published", user: "Admin", time: "1 hour ago", type: "announcement" },
+    { id: 4, action: "New student registered", user: "Student Portal", time: "2 hours ago", type: "user" },
+    { id: 5, action: "Server backup completed", user: "System", time: "3 hours ago", type: "system" }
   ];
 
   const mockUsers = [
-    { id: 1, name: "Dr. Sarah Johnson", email: "sarah.johnson@univ-bejaia.edu", role: "Professor", department: "Anatomy", status: "active", avatar: "SJ" },
-    { id: 2, name: "Dr. Michael Chen", email: "michael.chen@univ-bejaia.edu", role: "Associate Professor", department: "Physiology", status: "active", avatar: "MC" },
-    { id: 3, name: "Dr. Emily Rodriguez", email: "emily.rodriguez@univ-bejaia.edu", role: "Assistant Professor", department: "Biochemistry", status: "active", avatar: "ER" },
-    { id: 4, name: "Dr. James Wilson", email: "james.wilson@univ-bejaia.edu", role: "Professor", department: "Pathology", status: "inactive", avatar: "JW" },
-    { id: 5, name: "Dr. Lisa Thompson", email: "lisa.thompson@univ-bejaia.edu", role: "Lecturer", department: "Cell Biology", status: "active", avatar: "LT" }
+    { id: 1, name: "Dr. Sarah Johnson", email: "sarah.johnson@univ-bejaia.edu", role: "Professor", department: "Computer Science", status: "active", avatar: "SJ" },
+    { id: 2, name: "Dr. Michael Chen", email: "michael.chen@univ-bejaia.edu", role: "Associate Professor", department: "Software Engineering", status: "active", avatar: "MC" },
+    { id: 3, name: "Dr. Emily Rodriguez", email: "emily.rodriguez@univ-bejaia.edu", role: "Assistant Professor", department: "Information Technology", status: "active", avatar: "ER" },
+    { id: 4, name: "Dr. James Wilson", email: "james.wilson@univ-bejaia.edu", role: "Professor", department: "Architecture", status: "inactive", avatar: "JW" },
+    { id: 5, name: "Dr. Lisa Thompson", email: "lisa.thompson@univ-bejaia.edu", role: "Lecturer", department: "Network Engineering", status: "active", avatar: "LT" }
   ];
 
   const mockCourses = [
-    { id: 1, title: "Human Anatomy", instructor: "Dr. Sarah Johnson", year: 1, students: 450, status: "active", lastUpdated: "2024-12-15" },
-    { id: 2, title: "Physiology Fundamentals", instructor: "Dr. Michael Chen", year: 1, students: 420, status: "active", lastUpdated: "2024-12-14" },
-    { id: 3, title: "Biochemistry", instructor: "Dr. Emily Rodriguez", year: 1, students: 380, status: "active", lastUpdated: "2024-12-13" },
-    { id: 4, title: "Pathology", instructor: "Dr. James Wilson", year: 2, students: 360, status: "draft", lastUpdated: "2024-12-12" },
-    { id: 5, title: "Pharmacology", instructor: "Dr. Lisa Thompson", year: 2, students: 340, status: "active", lastUpdated: "2024-12-11" }
+    { id: 1, title: "Programming Fundamentals", instructor: "Dr. Sarah Johnson", year: 1, students: 450, status: "active", lastUpdated: "2024-12-15" },
+    { id: 2, title: "Computer Architecture", instructor: "Dr. Michael Chen", year: 1, students: 420, status: "active", lastUpdated: "2024-12-14" },
+    { id: 3, title: "Data Structures", instructor: "Dr. Emily Rodriguez", year: 1, students: 380, status: "active", lastUpdated: "2024-12-13" },
+    { id: 4, title: "Software Engineering", instructor: "Dr. James Wilson", year: 2, students: 360, status: "draft", lastUpdated: "2024-12-12" },
+    { id: 5, title: "Database Systems", instructor: "Dr. Lisa Thompson", year: 2, students: 340, status: "active", lastUpdated: "2024-12-11" }
   ];
 
   const mockResources = [
-    { id: 1, title: "Gray's Anatomy for Students", type: "PDF", size: "45.2 MB", uploads: 1250, status: "published", lastUpdated: "2024-12-15" },
-    { id: 2, title: "Cardiovascular Physiology Videos", type: "Video", size: "2.1 GB", uploads: 890, status: "published", lastUpdated: "2024-12-14" },
-    { id: 3, title: "Netter's Atlas", type: "Image", size: "156.7 MB", uploads: 2100, status: "published", lastUpdated: "2024-12-13" },
-    { id: 4, title: "Pathology Case Studies", type: "PDF", size: "78.3 MB", uploads: 650, status: "draft", lastUpdated: "2024-12-12" },
-    { id: 5, title: "Drug Database", type: "Interactive", size: "12.5 MB", uploads: 1100, status: "published", lastUpdated: "2024-12-11" }
+    { id: 1, title: "Programming Fundamentals Guide", type: "PDF", size: "45.2 MB", uploads: 1250, status: "published", lastUpdated: "2024-12-15" },
+    { id: 2, title: "Computer Architecture Tutorials", type: "Video", size: "2.1 GB", uploads: 890, status: "published", lastUpdated: "2024-12-14" },
+    { id: 3, title: "Data Structures Visual Guide", type: "Image", size: "156.7 MB", uploads: 2100, status: "published", lastUpdated: "2024-12-13" },
+    { id: 4, title: "Software Engineering Case Studies", type: "PDF", size: "78.3 MB", uploads: 650, status: "draft", lastUpdated: "2024-12-12" },
+    { id: 5, title: "Database Design Patterns", type: "Interactive", size: "12.5 MB", uploads: 1100, status: "published", lastUpdated: "2024-12-11" }
   ];
 
   const mockAnnouncements = [
-    { id: 1, title: "Midterm Examination Schedule", author: "Academic Office", status: "published", views: 1250, date: "2024-12-15" },
-    { id: 2, title: "New Digital Library Resources", author: "Library Services", status: "published", views: 890, date: "2024-12-14" },
-    { id: 3, title: "Clinical Skills Workshop", author: "Clinical Skills Department", status: "draft", views: 0, date: "2024-12-13" },
-    { id: 4, title: "Research Symposium Call", author: "Research Committee", status: "published", views: 650, date: "2024-12-12" },
-    { id: 5, title: "Campus Wi-Fi Maintenance", author: "IT Services", status: "published", views: 1100, date: "2024-12-11" }
+    { id: 1, title: "Programming Competition Registration", author: "Computer Science Department", status: "published", views: 1250, date: "2024-12-15" },
+    { id: 2, title: "New Software Development Lab", author: "IT Services", status: "published", views: 890, date: "2024-12-14" },
+    { id: 3, title: "Hackathon Workshop", author: "Student Affairs", status: "draft", views: 0, date: "2024-12-13" },
+    { id: 4, title: "Tech Innovation Symposium", author: "Research Committee", status: "published", views: 650, date: "2024-12-12" },
+    { id: 5, title: "Server Maintenance Notice", author: "IT Services", status: "published", views: 1100, date: "2024-12-11" }
   ];
 
   const getStatusColor = (status: string) => {

@@ -67,7 +67,7 @@ const HeroSection = () => {
               <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-gray-900 leading-tight">
                 Faculty of
                 <span className="block bg-gradient-primary bg-clip-text text-transparent">
-                  Medicine
+                  Law & Political Sciences
                 </span>
               </h1>
               
@@ -77,7 +77,7 @@ const HeroSection = () => {
                 </h2>
                 
                 <p className="text-lg md:text-xl text-gray-600 max-w-2xl leading-relaxed">
-                  Your modern, comprehensive platform for medical education. 
+                  Your modern, comprehensive platform for law and political sciences education. 
                   Access courses, resources, timetables, and everything you need for academic success.
                 </p>
               </div>
