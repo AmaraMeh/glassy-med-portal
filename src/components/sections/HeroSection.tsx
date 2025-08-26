@@ -11,34 +11,36 @@ import {
   Award,
   Clock
 } from "lucide-react";
+import { useFaculty } from "@/lib/faculty-context";
 
 const HeroSection = () => {
+  const { faculty } = useFaculty();
   const quickActions = [
     {
       icon: BookOpen,
       title: "Courses",
-      description: "Access your medical courses by year",
+      description: "Accédez aux cours par filière et par année",
       color: "gradient-primary",
       href: "/courses"
     },
     {
       icon: Calendar,
       title: "Timetable",
-      description: "View your schedule and plan your day",
+      description: "Consultez votre emploi du temps",
       color: "gradient-secondary",
       href: "/timetable"
     },
     {
       icon: FileText,
       title: "Resources",
-      description: "Download PDFs, videos and study materials",
+      description: "Téléchargez PDF, vidéos et supports",
       color: "bg-accent-highlight",
       href: "/resources"
     },
     {
       icon: Megaphone,
       title: "News",
-      description: "Latest announcements and updates",
+      description: "Dernières annonces et actualités",
       color: "bg-medical-pink",
       href: "/#announcements"
     }
@@ -65,20 +67,19 @@ const HeroSection = () => {
               </div>
               
               <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-gray-900 leading-tight">
-                Faculty of
+                {faculty.frenchName}
                 <span className="block bg-gradient-primary bg-clip-text text-transparent">
-                  Medicine
+                  {faculty.displayName}
                 </span>
               </h1>
               
               <div className="space-y-4">
                 <h2 className="text-2xl md:text-3xl font-semibold text-gray-800">
-                  University of Béjaïa Interactive Student Portal
+                  {faculty.heroTagline || "Portail étudiant interactif"}
                 </h2>
                 
                 <p className="text-lg md:text-xl text-gray-600 max-w-2xl leading-relaxed">
-                  Your modern, comprehensive platform for medical education. 
-                  Access courses, resources, timetables, and everything you need for academic success.
+                  Accédez aux cours, ressources, emplois du temps et annonces adaptés à votre faculté.
                 </p>
               </div>
             </div>

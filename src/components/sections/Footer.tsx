@@ -14,8 +14,10 @@ import {
   FileText,
   Megaphone
 } from "lucide-react";
+import { useFaculty } from "@/lib/faculty-context";
 
 const Footer = () => {
+  const { faculty } = useFaculty();
   const quickLinks = [
     { icon: BookOpen, label: "Courses", href: "#courses" },
     { icon: Calendar, label: "Timetable", href: "#timetable" },
@@ -63,14 +65,13 @@ const Footer = () => {
                 <Heart className="w-7 h-7 text-white" />
               </div>
               <div>
-                <h3 className="text-xl font-bold text-foreground">Faculty of Medicine</h3>
-                <p className="text-sm text-muted-foreground">University of Béjaïa</p>
+                <h3 className="text-xl font-bold text-foreground">{faculty.displayName}</h3>
+                <p className="text-sm text-muted-foreground">{faculty.frenchName}</p>
               </div>
             </div>
             
             <p className="text-muted-foreground leading-relaxed">
-              Your comprehensive digital platform for medical education, providing access to courses, 
-              resources, and academic support for students at all levels.
+              Plateforme numérique pour l'éducation, avec accès aux cours, ressources et support académique.
             </p>
 
             {/* Contact info */}
@@ -178,7 +179,7 @@ const Footer = () => {
           <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
             <div className="text-center md:text-left">
               <p className="text-muted-foreground text-sm">
-                © 2025 Faculty of Medicine - University of Béjaïa. All rights reserved.
+                © 2025 {faculty.displayName}. Tous droits réservés.
               </p>
               <p className="text-muted-foreground text-xs mt-1">
                 Developed by <span className="text-primary font-medium">Amara Mehdi</span> - E-CAMPUS Portal

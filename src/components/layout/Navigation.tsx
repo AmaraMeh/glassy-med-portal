@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useParams } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { 
   BookOpen, 
@@ -14,12 +14,16 @@ import {
   GraduationCap
 } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { useFaculty } from "@/lib/faculty-context";
+import { FACULTIES } from "@/lib/faculties";
 
 const Navigation = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isDarkMode, setIsDarkMode] = useState(false);
   const location = useLocation();
+  const params = useParams();
+  const { faculty } = useFaculty();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -35,17 +39,19 @@ const Navigation = () => {
     document.documentElement.classList.toggle("dark");
   };
 
+  const slug = (params as any)?.slug as string | undefined;
+  const base = slug ? `/faculties/${slug}` : "";
   const navItems = [
-    { icon: BookOpen, label: "Courses", href: "/courses" },
-    { icon: Calendar, label: "Timetable", href: "/timetable" },
-    { icon: FileText, label: "Resources", href: "/resources" },
-    { icon: Megaphone, label: "Announcements", href: "/#announcements" },
-    { icon: Settings, label: "Admin", href: "/admin" },
+    { icon: BookOpen, label: "Courses", href: `${base}/courses` || "/courses" },
+    { icon: Calendar, label: "Timetable", href: `${base}/timetable` || "/timetable" },
+    { icon: FileText, label: "Resources", href: `${base}/resources` || "/resources" },
+    { icon: Megaphone, label: "Announcements", href: slug ? `${base}#announcements` : "/#announcements" },
+    { icon: Settings, label: "Admin", href: `${base}/admin` || "/admin" },
   ];
 
   const isActive = (href: string) => {
-    if (href === "/#announcements") {
-      return location.pathname === "/" && location.hash === "#announcements";
+    if (href.endsWith("#announcements")) {
+      return location.hash === "#announcements";
     }
     return location.pathname === href;
   };
@@ -62,15 +68,15 @@ const Navigation = () => {
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between">
           {/* Logo */}
-          <Link to="/" className="flex items-center space-x-3">
+          <Link to={slug ? `/faculties/${slug}` : "/"} className="flex items-center space-x-3">
             <div className="w-10 h-10 bg-primary rounded-xl flex items-center justify-center shadow-lg">
               <GraduationCap className="w-6 h-6 text-white" />
             </div>
             <div className="hidden md:block">
               <h1 className="text-xl font-bold text-gray-900">
-                Faculty of Medicine
+                {faculty.displayName}
               </h1>
-              <p className="text-xs text-gray-600">University of Béjaïa</p>
+              <p className="text-xs text-gray-600">{faculty.frenchName}</p>
             </div>
           </Link>
 
@@ -97,6 +103,26 @@ const Navigation = () => {
 
           {/* Right side actions */}
           <div className="flex items-center space-x-3">
+            {/* Faculties dropdown */}
+            <div className="hidden md:block relative">
+              <select
+                className="border border-gray-200 rounded-lg p-2 text-sm text-gray-700 hover:border-primary/50"
+                value={slug || "medicine"}
+                onChange={(e) => {
+                  const next = e.target.value;
+                  if (next === "medicine") {
+                    window.location.href = "/";
+                  } else {
+                    window.location.href = `/faculties/${next}`;
+                  }
+                }}
+              >
+                <option value="medicine">Faculté de Médecine</option>
+                {FACULTIES.filter(f => f.slug !== "medicine").map(f => (
+                  <option key={f.slug} value={f.slug}>{f.frenchName}</option>
+                ))}
+              </select>
+            </div>
             {/* Dark mode toggle */}
             <Button
               variant="ghost"
@@ -138,6 +164,25 @@ const Navigation = () => {
         {isMobileMenuOpen && (
           <div className="lg:hidden mt-4 bg-white rounded-2xl p-4 animate-slide-up shadow-lg border border-gray-100">
             <div className="flex flex-col space-y-2">
+              <div className="mb-2">
+                <select
+                  className="w-full border border-gray-200 rounded-lg p-2 text-sm text-gray-700"
+                  value={slug || "medicine"}
+                  onChange={(e) => {
+                    const next = e.target.value;
+                    if (next === "medicine") {
+                      window.location.href = "/";
+                    } else {
+                      window.location.href = `/faculties/${next}`;
+                    }
+                  }}
+                >
+                  <option value="medicine">Faculté de Médecine</option>
+                  {FACULTIES.filter(f => f.slug !== "medicine").map(f => (
+                    <option key={f.slug} value={f.slug}>{f.frenchName}</option>
+                  ))}
+                </select>
+              </div>
               {navItems.map((item) => (
                 <Button
                   key={item.label}
