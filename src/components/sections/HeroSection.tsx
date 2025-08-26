@@ -10,7 +10,7 @@ import {
   Award,
   Clock
 } from "lucide-react";
-import heroImage from "@/assets/hero-medical-faculty.jpg";
+import { Link } from "react-router-dom";
 
 const HeroSection = () => {
   const quickActions = [
@@ -52,19 +52,9 @@ const HeroSection = () => {
   ];
 
   return (
-    <section className="relative min-h-screen flex items-center overflow-hidden">
-      {/* Background with overlay */}
-      <div className="absolute inset-0 z-0">
-        <img 
-          src={heroImage} 
-          alt="Faculty of Medicine - University of Béjaïa"
-          className="w-full h-full object-cover"
-        />
-        <div className="absolute inset-0 hero-gradient"></div>
-      </div>
-
+    <section className="relative min-h-[80vh] flex items-center bg-background">
       {/* Content */}
-      <div className="relative z-10 container mx-auto px-4 py-24">
+      <div className="container mx-auto px-4 py-24">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           {/* Text Content */}
           <div className="space-y-8 animate-slide-up">
@@ -81,13 +71,12 @@ const HeroSection = () => {
                 </span>
               </h1>
               
-              <p className="text-xl md:text-2xl text-muted-foreground max-w-2xl">
-                University of Béjaïa Interactive Student Portal
+              <p className="text-2xl md:text-3xl text-foreground font-semibold max-w-2xl">
+                University of Béjaïa — Interactive Student Portal
               </p>
               
-              <p className="text-lg text-muted-foreground max-w-xl">
-                Your modern, comprehensive platform for medical education. 
-                Access courses, resources, timetables, and everything you need for academic success.
+              <p className="text-lg md:text-xl text-muted-foreground max-w-xl">
+                A modern, comprehensive platform for the Faculty of Medicine. Access courses, resources, timetables—everything you need for academic success.
               </p>
             </div>
 
@@ -96,18 +85,24 @@ const HeroSection = () => {
               <Button 
                 size="lg" 
                 className="gradient-primary shadow-float hover:shadow-glass-lg text-lg px-8 py-6 group"
+                asChild
               >
-                Get Started
-                <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
+                <Link to="/courses">
+                  Get Started
+                  <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
+                </Link>
               </Button>
               
               <Button 
                 size="lg" 
                 variant="outline" 
                 className="glass-card-hover text-lg px-8 py-6 group border-glass-border"
+                asChild
               >
-                <Play className="w-5 h-5 mr-2 group-hover:scale-110 transition-transform" />
-                Watch Tour
+                <Link to="/resources">
+                  <Play className="w-5 h-5 mr-2 group-hover:scale-110 transition-transform" />
+                  Watch Tour
+                </Link>
               </Button>
             </div>
 
