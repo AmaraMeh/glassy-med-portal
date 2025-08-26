@@ -10,7 +10,7 @@ import {
   Award,
   Clock
 } from "lucide-react";
-import heroImage from "@/assets/hero-medical-faculty.jpg";
+import { Link } from "react-router-dom";
 
 const HeroSection = () => {
   const quickActions = [
@@ -19,28 +19,28 @@ const HeroSection = () => {
       title: "Courses",
       description: "Access your medical courses by year",
       color: "gradient-primary",
-      href: "#courses"
+      href: "/courses"
     },
     {
       icon: Calendar,
       title: "Timetable",
       description: "View your schedule and plan your day",
       color: "gradient-secondary",
-      href: "#timetable"
+      href: "/timetable"
     },
     {
       icon: FileText,
       title: "Resources",
       description: "Download PDFs, videos and study materials",
       color: "bg-accent-highlight",
-      href: "#resources"
+      href: "/resources"
     },
     {
       icon: Megaphone,
       title: "News",
       description: "Latest announcements and updates",
       color: "bg-medical-pink",
-      href: "#announcements"
+      href: "/announcements"
     }
   ];
 
@@ -52,42 +52,27 @@ const HeroSection = () => {
   ];
 
   return (
-    <section className="relative min-h-screen flex items-center overflow-hidden">
-      {/* Background with overlay */}
-      <div className="absolute inset-0 z-0">
-        <img 
-          src={heroImage} 
-          alt="Faculty of Medicine - University of Béjaïa"
-          className="w-full h-full object-cover"
-        />
-        <div className="absolute inset-0 hero-gradient"></div>
-      </div>
-
+    <section className="relative min-h-screen flex items-center overflow-hidden bg-white dark:bg-background">
       {/* Content */}
-      <div className="relative z-10 container mx-auto px-4 py-24">
+      <div className="relative z-10 container mx-auto px-4 py-28">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           {/* Text Content */}
           <div className="space-y-8 animate-slide-up">
-            <div className="space-y-4">
-              <div className="inline-flex items-center space-x-2 glass-card px-4 py-2 rounded-full">
+            <div className="space-y-5">
+              <div className="inline-flex items-center space-x-2 bg-white dark:bg-card border border-glass-border px-4 py-2 rounded-full shadow-float">
                 <div className="w-2 h-2 bg-medical-green rounded-full animate-glow"></div>
                 <span className="text-sm font-medium">E-CAMPUS 2025</span>
               </div>
               
-              <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-foreground leading-tight">
-                Faculty of
+              <h1 className="text-4xl md:text-6xl lg:text-7xl font-extrabold text-foreground leading-tight tracking-tight">
+                University of Béjaïa
                 <span className="block bg-gradient-primary bg-clip-text text-transparent">
-                  Medicine
+                  Interactive Student Portal
                 </span>
               </h1>
               
-              <p className="text-xl md:text-2xl text-muted-foreground max-w-2xl">
-                University of Béjaïa Interactive Student Portal
-              </p>
-              
-              <p className="text-lg text-muted-foreground max-w-xl">
-                Your modern, comprehensive platform for medical education. 
-                Access courses, resources, timetables, and everything you need for academic success.
+              <p className="text-lg md:text-xl text-foreground/80 max-w-2xl font-medium">
+                Your modern, comprehensive platform for medical education. Access courses, resources, timetables, and everything you need for academic success.
               </p>
             </div>
 
@@ -96,9 +81,12 @@ const HeroSection = () => {
               <Button 
                 size="lg" 
                 className="gradient-primary shadow-float hover:shadow-glass-lg text-lg px-8 py-6 group"
+                asChild
               >
-                Get Started
-                <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
+                <Link to="/courses">
+						Get Started
+                  <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
+                </Link>
               </Button>
               
               <Button 
@@ -112,11 +100,11 @@ const HeroSection = () => {
             </div>
 
             {/* Stats */}
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 pt-8">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 pt-4">
               {stats.map((stat, index) => (
                 <div 
                   key={stat.label}
-                  className="glass-card p-4 rounded-xl text-center animate-scale-in"
+                  className="bg-white dark:bg-card border border-glass-border p-4 rounded-xl text-center animate-scale-in"
                   style={{ animationDelay: `${index * 0.1}s` }}
                 >
                   <stat.icon className="w-6 h-6 text-primary mx-auto mb-2" />
@@ -136,9 +124,9 @@ const HeroSection = () => {
             
             <div className="grid sm:grid-cols-2 gap-4">
               {quickActions.map((action, index) => (
-                <a
+                <Link
                   key={action.title}
-                  href={action.href}
+                  to={action.href}
                   className="glass-card-hover p-6 rounded-2xl group block animate-scale-in"
                   style={{ animationDelay: `${0.4 + index * 0.1}s` }}
                 >
@@ -155,16 +143,16 @@ const HeroSection = () => {
                   </p>
                   
                   <ArrowRight className="w-4 h-4 text-primary mt-3 group-hover:translate-x-1 transition-transform" />
-                </a>
+                </Link>
               ))}
             </div>
           </div>
         </div>
       </div>
 
-      {/* Floating elements */}
-      <div className="absolute top-1/4 right-10 w-20 h-20 gradient-secondary rounded-full opacity-20 animate-float hidden lg:block"></div>
-      <div className="absolute bottom-1/4 left-10 w-16 h-16 bg-accent-highlight rounded-full opacity-30 animate-float hidden lg:block" style={{ animationDelay: "2s" }}></div>
+      {/* Subtle background accents */}
+      <div className="absolute -top-10 -right-10 w-40 h-40 gradient-secondary rounded-full opacity-10 blur-2xl hidden lg:block"></div>
+      <div className="absolute bottom-0 left-10 w-24 h-24 bg-accent-highlight rounded-full opacity-15 blur-xl hidden lg:block" style={{ animationDelay: "2s" }}></div>
     </section>
   );
 };

@@ -15,6 +15,7 @@ import {
   Activity,
   Microscope
 } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const YearSelector = () => {
   const [selectedYear, setSelectedYear] = useState(1);
@@ -23,7 +24,7 @@ const YearSelector = () => {
     {
       year: 1,
       title: "First Year",
-      subtitle: "Foundation Sciences",
+      subtitle: "Pré‑clinique",
       icon: Microscope,
       description: "Basic medical sciences, anatomy, physiology",
       subjects: ["Anatomy", "Physiology", "Biochemistry", "Cell Biology"],
@@ -33,7 +34,7 @@ const YearSelector = () => {
     {
       year: 2,
       title: "Second Year",
-      subtitle: "Pre-Clinical",
+      subtitle: "Pré‑clinique",
       icon: Brain,
       description: "Advanced basic sciences and pathology",
       subjects: ["Pathology", "Pharmacology", "Microbiology", "Immunology"],
@@ -43,7 +44,7 @@ const YearSelector = () => {
     {
       year: 3,
       title: "Third Year",
-      subtitle: "Clinical Introduction",
+      subtitle: "Pré‑clinique",
       icon: Stethoscope,
       description: "Introduction to clinical medicine",
       subjects: ["Internal Medicine", "Surgery", "Radiology", "Clinical Skills"],
@@ -53,7 +54,7 @@ const YearSelector = () => {
     {
       year: 4,
       title: "Fourth Year",
-      subtitle: "Clinical Rotations",
+      subtitle: "Clinique",
       icon: Heart,
       description: "Core clinical rotations and specialties",
       subjects: ["Cardiology", "Gastroenterology", "Neurology", "Psychiatry"],
@@ -63,7 +64,7 @@ const YearSelector = () => {
     {
       year: 5,
       title: "Fifth Year",
-      subtitle: "Advanced Clinical",
+      subtitle: "Clinique",
       icon: Eye,
       description: "Advanced clinical practice and subspecialties",
       subjects: ["Ophthalmology", "ENT", "Dermatology", "Emergency Medicine"],
@@ -73,7 +74,7 @@ const YearSelector = () => {
     {
       year: 6,
       title: "Sixth Year",
-      subtitle: "Clinical Clerkship",
+      subtitle: "Clinique",
       icon: Baby,
       description: "Specialized rotations and electives",
       subjects: ["Pediatrics", "Obstetrics", "Gynecology", "Anesthesiology"],
@@ -83,7 +84,7 @@ const YearSelector = () => {
     {
       year: 7,
       title: "Seventh Year",
-      subtitle: "Internship",
+      subtitle: "Clinique",
       icon: Activity,
       description: "Clinical internship and preparation for residency",
       subjects: ["Clinical Internship", "Research", "Board Preparation", "Ethics"],
@@ -93,6 +94,8 @@ const YearSelector = () => {
   ];
 
   const selectedYearData = medicalYears.find(y => y.year === selectedYear);
+
+  const isPreClinique = selectedYear <= 3;
 
   return (
     <section id="courses" className="py-20 relative">
@@ -114,6 +117,16 @@ const YearSelector = () => {
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
             Each year has its own curriculum, resources, and specialized content tailored to your level of study.
           </p>
+        </div>
+
+        {/* Cycle Labels */}
+        <div className="flex justify-center gap-3 mb-6">
+          <div className={`px-3 py-1 rounded-full text-sm border ${isPreClinique ? 'bg-primary/10 text-primary border-primary/20' : 'text-muted-foreground border-glass-border'}`}>
+            Cycle pré‑clinique (1–3)
+          </div>
+          <div className={`px-3 py-1 rounded-full text-sm border ${!isPreClinique ? 'bg-primary/10 text-primary border-primary/20' : 'text-muted-foreground border-glass-border'}`}>
+            Cycle clinique (4–7)
+          </div>
         </div>
 
         {/* Year Selection Grid */}
@@ -172,17 +185,23 @@ const YearSelector = () => {
 
                   {/* Action Buttons */}
                   <div className="flex flex-col sm:flex-row gap-3">
-                    <Button className="gradient-primary shadow-float">
-                      <BookOpen className="w-4 h-4 mr-2" />
-                      View Courses
+                    <Button className="gradient-primary shadow-float" asChild>
+                      <Link to="/courses">
+                        <BookOpen className="w-4 h-4 mr-2" />
+                        View Courses
+                      </Link>
                     </Button>
-                    <Button variant="outline" className="glass-card-hover border-glass-border">
-                      <Calendar className="w-4 h-4 mr-2" />
-                      Timetable
+                    <Button variant="outline" className="glass-card-hover border-glass-border" asChild>
+                      <Link to="/timetable">
+                        <Calendar className="w-4 h-4 mr-2" />
+                        Timetable
+                      </Link>
                     </Button>
-                    <Button variant="outline" className="glass-card-hover border-glass-border">
-                      <FileText className="w-4 h-4 mr-2" />
-                      Resources
+                    <Button variant="outline" className="glass-card-hover border-glass-border" asChild>
+                      <Link to="/resources">
+                        <FileText className="w-4 h-4 mr-2" />
+                        Resources
+                      </Link>
                     </Button>
                   </div>
                 </div>

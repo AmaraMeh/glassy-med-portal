@@ -5,7 +5,6 @@ import {
   Calendar, 
   FileText, 
   Megaphone, 
-  Heart, 
   Settings, 
   Moon, 
   Sun,
@@ -13,6 +12,7 @@ import {
   X
 } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { Link } from "react-router-dom";
 
 const Navigation = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -34,12 +34,11 @@ const Navigation = () => {
   };
 
   const navItems = [
-    { icon: BookOpen, label: "Courses", href: "#courses" },
-    { icon: Calendar, label: "Timetable", href: "#timetable" },
-    { icon: FileText, label: "Resources", href: "#resources" },
-    { icon: Megaphone, label: "Announcements", href: "#announcements" },
-    { icon: Heart, label: "Favorites", href: "#favorites" },
-    { icon: Settings, label: "Admin", href: "#admin" },
+    { icon: BookOpen, label: "Courses", href: "/courses" },
+    { icon: Calendar, label: "Timetable", href: "/timetable" },
+    { icon: FileText, label: "Resources", href: "/resources" },
+    { icon: Megaphone, label: "Announcements", href: "/announcements" },
+    { icon: Settings, label: "Admin", href: "/admin" },
   ];
 
   return (
@@ -55,14 +54,13 @@ const Navigation = () => {
         <div className="flex items-center justify-between">
           {/* Logo */}
           <div className="flex items-center space-x-3">
-            <div className="w-10 h-10 gradient-primary rounded-xl flex items-center justify-center shadow-float">
-              <Heart className="w-6 h-6 text-white" />
-            </div>
             <div className="hidden md:block">
-              <h1 className="text-xl font-bold bg-gradient-primary bg-clip-text text-transparent">
-                Faculty of Medicine
-              </h1>
-              <p className="text-xs text-muted-foreground">University of Béjaïa</p>
+              <Link to="/" className="block">
+                <h1 className="text-xl font-bold bg-gradient-primary bg-clip-text text-transparent">
+                  Faculty of Medicine
+                </h1>
+                <p className="text-xs text-muted-foreground">University of Béjaïa</p>
+              </Link>
             </div>
           </div>
 
@@ -76,10 +74,10 @@ const Navigation = () => {
                 className="glass-card-hover text-foreground hover:text-primary"
                 asChild
               >
-                <a href={item.href} className="flex items-center space-x-2">
+                <Link to={item.href} className="flex items-center space-x-2">
                   <item.icon className="w-4 h-4" />
                   <span>{item.label}</span>
-                </a>
+                </Link>
               </Button>
             ))}
           </div>
@@ -135,10 +133,10 @@ const Navigation = () => {
                   asChild
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
-                  <a href={item.href} className="flex items-center space-x-3">
+                  <Link to={item.href} className="flex items-center space-x-3">
                     <item.icon className="w-4 h-4" />
                     <span>{item.label}</span>
-                  </a>
+                  </Link>
                 </Button>
               ))}
               <Button 
