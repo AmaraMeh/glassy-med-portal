@@ -1,73 +1,182 @@
-# Welcome to your Lovable project
+# University of Béjaïa - Faculty Websites
 
-## Project info
+This repository contains 7 separate faculty websites for the University of Béjaïa, each with its own specialized content and admin panel.
 
-**URL**: https://lovable.dev/projects/a61b2466-546c-4573-a562-a0bcd7067c69
+## 🏛️ Faculties
 
-## How can I edit this code?
+### 1. Faculty of Technology
+- **Specialties**: ST LMD / ST ING 1er année et Architecture
+- **Directory**: `faculties/technologie/`
+- **Port**: 3001
 
-There are several ways of editing your application.
+### 2. Faculty of Letters & Languages
+- **Specialties**: Anglais / Français / Arabe / Tamazight / Traduction
+- **Directory**: `faculties/lettres-langues/`
+- **Port**: 3002
 
-**Use Lovable**
+### 3. Faculty of Law & Political Sciences
+- **Specialties**: Droit
+- **Directory**: `faculties/droit-sciences-politiques/`
+- **Port**: 3003
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/a61b2466-546c-4573-a562-a0bcd7067c69) and start prompting.
+### 4. Faculty of Economics & Management
+- **Specialties**: SEGC
+- **Directory**: `faculties/sciences-economiques/`
+- **Port**: 3004
 
-Changes made via Lovable will be committed automatically to this repo.
+### 5. Faculty of Humanities & Social Sciences
+- **Specialties**: STAPS / Sciences Humaines / Sciences Sociales
+- **Directory**: `faculties/sciences-humaines/`
+- **Port**: 3005
 
-**Use your preferred IDE**
+### 6. Faculty of Exact Sciences
+- **Specialties**: Informatique LMD / Informatique ING / Sciences de la Matière / Mathématiques
+- **Directory**: `faculties/sciences-exactes/`
+- **Port**: 3006
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+### 7. Faculty of Natural & Life Sciences
+- **Specialties**: Biologie 1er année / Sciences de la Matière 1er année
+- **Directory**: `faculties/sciences-nature-vie/`
+- **Port**: 3007
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+## 🚀 Quick Start
 
-Follow these steps:
+### Prerequisites
+- Node.js (v18 or higher)
+- npm or yarn
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+### Installation
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+1. **Clone the repository**
+   ```bash
+   git clone <repository-url>
+   cd university-bejaia-faculties
+   ```
 
-# Step 3: Install the necessary dependencies.
-npm i
+2. **Install dependencies for all faculties**
+   ```bash
+   ./install_all.sh
+   ```
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
+3. **Start all faculty websites**
+   ```bash
+   ./start_all.sh
+   ```
+
+### Individual Faculty Setup
+
+To work with a specific faculty:
+
+```bash
+cd faculties/[faculty-name]
+npm install
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+## 🛠️ Technology Stack
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+Each faculty website is built with:
+- **Frontend**: React 18 + TypeScript
+- **Styling**: Tailwind CSS + shadcn/ui
+- **Routing**: React Router DOM
+- **State Management**: TanStack Query
+- **Backend**: Supabase
+- **Build Tool**: Vite
 
-**Use GitHub Codespaces**
+## 📁 Project Structure
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+```
+faculties/
+├── technologie/                 # Faculty of Technology
+├── lettres-langues/            # Faculty of Letters & Languages
+├── droit-sciences-politiques/  # Faculty of Law & Political Sciences
+├── sciences-economiques/       # Faculty of Economics & Management
+├── sciences-humaines/          # Faculty of Humanities & Social Sciences
+├── sciences-exactes/           # Faculty of Exact Sciences
+└── sciences-nature-vie/        # Faculty of Natural & Life Sciences
+```
 
-## What technologies are used for this project?
+Each faculty directory contains:
+- `src/` - Source code
+- `public/` - Static assets
+- `supabase/` - Database migrations
+- `package.json` - Dependencies and scripts
 
-This project is built with:
+## 🎨 Features
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+### Common Features (All Faculties)
+- **Responsive Design**: Mobile-first approach
+- **Dark Mode**: Toggle between light and dark themes
+- **Admin Panel**: Separate admin interface for each faculty
+- **Course Management**: Year-based course organization
+- **Resource Library**: PDFs, videos, and study materials
+- **Timetable**: Interactive schedule management
+- **Announcements**: Real-time updates and notifications
+- **User Authentication**: Secure login system
 
-## How can I deploy this project?
+### Faculty-Specific Features
+- **Customized Content**: Each faculty has specialized courses and subjects
+- **Year Selection**: Undergraduate (Years 1-3) and Graduate (Years 4-7) cycles
+- **Specialized Resources**: Faculty-specific study materials
+- **Department Management**: Faculty-specific departments and instructors
 
-Simply open [Lovable](https://lovable.dev/projects/a61b2466-546c-4573-a562-a0bcd7067c69) and click on Share -> Publish.
+## 🔧 Development
 
-## Can I connect a custom domain to my Lovable project?
+### Adding New Features
+1. Make changes in the base faculty (e.g., `technologie/`)
+2. Run the update script to propagate changes to other faculties:
+   ```bash
+   ./update_all_faculties.sh
+   ```
 
-Yes, you can!
+### Customizing Individual Faculties
+Each faculty can be customized independently by modifying files in their respective directories.
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+## 🌐 Deployment
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+### Production Build
+```bash
+cd faculties/[faculty-name]
+npm run build
+```
+
+### Environment Variables
+Each faculty uses the same Supabase configuration. Update the environment variables in each faculty's `.env` file if needed.
+
+## 📊 Database Schema
+
+The Supabase database includes:
+- **Profiles**: User information and matricule validation
+- **User Roles**: Admin, moderator, and user roles
+- **Courses**: Faculty-specific course management
+- **Resources**: File uploads and management
+- **Announcements**: Faculty-specific announcements
+- **Timetables**: Schedule management
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Test across all faculties
+5. Submit a pull request
+
+## 📝 License
+
+This project is licensed under the MIT License.
+
+## 🆘 Support
+
+For support or questions:
+- Create an issue in the repository
+- Contact the development team
+- Check the documentation in each faculty directory
+
+## 🔄 Updates
+
+To update all faculties with new features:
+```bash
+./update_all_faculties.sh
+```
+
+This script will propagate changes from the base faculty to all other faculties while preserving their individual customizations.

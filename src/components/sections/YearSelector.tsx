@@ -21,85 +21,85 @@ import {
 
 const YearSelector = () => {
   const [selectedYear, setSelectedYear] = useState(1);
-  const [selectedCycle, setSelectedCycle] = useState<'pre-clinical' | 'clinical'>('pre-clinical');
+  const [selectedCycle, setSelectedCycle] = useState<'undergraduate' | 'graduate'>('undergraduate');
 
-  const preClinicalYears = [
+  const undergraduateYears = [
     {
       year: 1,
       title: "First Year",
-      subtitle: "Foundation Sciences",
+      subtitle: "Foundation Law",
       icon: Microscope,
-      description: "Basic medical sciences, anatomy, physiology",
-      subjects: ["Anatomy", "Physiology", "Biochemistry", "Cell Biology"],
+      description: "Droit",
+      subjects: ["Constitutional Law", "Civil Law", "Criminal Law", "Legal Methods"],
       students: 450,
       color: "bg-blue-500"
     },
     {
       year: 2,
       title: "Second Year",
-      subtitle: "Pre-Clinical Sciences",
+      subtitle: "Advanced Languages",
       icon: Brain,
-      description: "Advanced basic sciences and pathology",
-      subjects: ["Pathology", "Pharmacology", "Microbiology", "Immunology"],
+      description: "Advanced language studies and linguistics",
+      subjects: ["Advanced Grammar", "Literature", "Linguistics", "Cultural Studies"],
       students: 420,
       color: "bg-indigo-500"
     },
     {
       year: 3,
       title: "Third Year",
-      subtitle: "Clinical Introduction",
+      subtitle: "Specialized Languages",
       icon: FlaskConical,
-      description: "Introduction to clinical medicine and laboratory sciences",
-      subjects: ["Internal Medicine", "Surgery", "Radiology", "Clinical Skills"],
+      description: "Specialized language applications and translation",
+      subjects: ["Translation Studies", "Interpretation", "Technical Writing", "Media Studies"],
       students: 380,
       color: "bg-purple-500"
     }
   ];
 
-  const clinicalYears = [
+  const graduateYears = [
     {
       year: 4,
       title: "Fourth Year",
-      subtitle: "Clinical Rotations",
+      subtitle: "Advanced Engineering",
       icon: Heart,
-      description: "Core clinical rotations and specialties",
-      subjects: ["Cardiology", "Gastroenterology", "Neurology", "Psychiatry"],
+      description: "Advanced engineering and technology applications",
+      subjects: ["System Design", "Project Management", "Advanced Programming", "Cloud Computing"],
       students: 360,
       color: "bg-red-500"
     },
     {
       year: 5,
       title: "Fifth Year",
-      subtitle: "Advanced Clinical",
+      subtitle: "Specialized Engineering",
       icon: Eye,
-      description: "Advanced clinical practice and subspecialties",
-      subjects: ["Ophthalmology", "ENT", "Dermatology", "Emergency Medicine"],
+      description: "Specialized engineering and research",
+      subjects: ["IoT Development", "Blockchain", "Robotics", "Data Science"],
       students: 340,
       color: "bg-orange-500"
     },
     {
       year: 6,
       title: "Sixth Year",
-      subtitle: "Clinical Clerkship",
+      subtitle: "Research & Development",
       icon: Baby,
-      description: "Specialized rotations and electives",
-      subjects: ["Pediatrics", "Obstetrics", "Gynecology", "Anesthesiology"],
+      description: "Research projects and advanced development",
+      subjects: ["Research Methods", "Innovation", "Entrepreneurship", "Industry Projects"],
       students: 320,
       color: "bg-pink-500"
     },
     {
       year: 7,
       title: "Seventh Year",
-      subtitle: "Internship",
+      subtitle: "Master's Thesis",
       icon: UserCheck,
-      description: "Clinical internship and preparation for residency",
-      subjects: ["Clinical Internship", "Research", "Board Preparation", "Ethics"],
+      description: "Master's thesis and professional preparation",
+      subjects: ["Thesis Research", "Professional Development", "Industry Internship", "Career Preparation"],
       students: 290,
       color: "bg-green-500"
     }
   ];
 
-  const allYears = [...preClinicalYears, ...clinicalYears];
+  const allYears = [...undergraduateYears, ...graduateYears];
   const selectedYearData = allYears.find(y => y.year === selectedYear);
 
   return (
@@ -115,7 +115,7 @@ const YearSelector = () => {
           <h2 className="text-3xl md:text-5xl font-bold mb-4 text-gray-900">
             Choose Your
             <span className="block bg-gradient-primary bg-clip-text text-transparent">
-              Medical Year
+              Law Year
             </span>
           </h2>
           
@@ -129,26 +129,26 @@ const YearSelector = () => {
           <div className="bg-white rounded-2xl p-2 shadow-lg border border-gray-100">
             <div className="flex space-x-2">
               <Button
-                variant={selectedCycle === 'pre-clinical' ? 'default' : 'ghost'}
-                className={selectedCycle === 'pre-clinical' ? 'bg-primary text-white' : 'text-gray-700 hover:text-primary'}
+                variant={selectedCycle === 'undergraduate' ? 'default' : 'ghost'}
+                className={selectedCycle === 'undergraduate' ? 'bg-primary text-white' : 'text-gray-700 hover:text-primary'}
                 onClick={() => {
-                  setSelectedCycle('pre-clinical');
+                  setSelectedCycle('undergraduate');
                   setSelectedYear(1);
                 }}
               >
                 <Brain className="w-4 h-4 mr-2" />
-                Pre-Clinical (Years 1-3)
+                Undergraduate (Years 1-3)
               </Button>
               <Button
-                variant={selectedCycle === 'clinical' ? 'default' : 'ghost'}
-                className={selectedCycle === 'clinical' ? 'bg-primary text-white' : 'text-gray-700 hover:text-primary'}
+                variant={selectedCycle === 'graduate' ? 'default' : 'ghost'}
+                className={selectedCycle === 'graduate' ? 'bg-primary text-white' : 'text-gray-700 hover:text-primary'}
                 onClick={() => {
-                  setSelectedCycle('clinical');
+                  setSelectedCycle('graduate');
                   setSelectedYear(4);
                 }}
               >
                 <Stethoscope className="w-4 h-4 mr-2" />
-                Clinical (Years 4-7)
+                Graduate (Years 4-7)
               </Button>
             </div>
           </div>
@@ -156,7 +156,7 @@ const YearSelector = () => {
 
         {/* Year Selection Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4 mb-12">
-          {(selectedCycle === 'pre-clinical' ? preClinicalYears : clinicalYears).map((year, index) => (
+          {(selectedCycle === 'undergraduate' ? undergraduateYears : graduateYears).map((year, index) => (
             <Button
               key={year.year}
               variant={selectedYear === year.year ? "default" : "outline"}

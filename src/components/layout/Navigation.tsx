@@ -68,7 +68,7 @@ const Navigation = () => {
             </div>
             <div className="hidden md:block">
               <h1 className="text-xl font-bold text-gray-900">
-                Faculty of Medicine
+                Faculty of Law & Political Sciences
               </h1>
               <p className="text-xs text-gray-600">University of Béjaïa</p>
             </div>
