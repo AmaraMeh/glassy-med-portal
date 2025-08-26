@@ -5,7 +5,6 @@ import {
   Calendar, 
   FileText, 
   Megaphone, 
-  Heart, 
   Settings, 
   Moon, 
   Sun,
@@ -34,12 +33,11 @@ const Navigation = () => {
   };
 
   const navItems = [
-    { icon: BookOpen, label: "Courses", href: "#courses" },
-    { icon: Calendar, label: "Timetable", href: "#timetable" },
-    { icon: FileText, label: "Resources", href: "#resources" },
-    { icon: Megaphone, label: "Announcements", href: "#announcements" },
-    { icon: Heart, label: "Favorites", href: "#favorites" },
-    { icon: Settings, label: "Admin", href: "#admin" },
+    { icon: BookOpen, label: "Courses", href: "/courses" },
+    { icon: Calendar, label: "Timetable", href: "/timetable" },
+    { icon: FileText, label: "Resources", href: "/resources" },
+    { icon: Megaphone, label: "Announcements", href: "/announcements" },
+    { icon: Settings, label: "Admin", href: "/admin" },
   ];
 
   return (
@@ -55,9 +53,6 @@ const Navigation = () => {
         <div className="flex items-center justify-between">
           {/* Logo */}
           <div className="flex items-center space-x-3">
-            <div className="w-10 h-10 gradient-primary rounded-xl flex items-center justify-center shadow-float">
-              <Heart className="w-6 h-6 text-white" />
-            </div>
             <div className="hidden md:block">
               <h1 className="text-xl font-bold bg-gradient-primary bg-clip-text text-transparent">
                 Faculty of Medicine

@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -9,10 +10,13 @@ import {
   Pin,
   AlertCircle,
   Info,
-  CheckCircle
+  CheckCircle,
+  ChevronDown
 } from "lucide-react";
 
 const LatestAnnouncements = () => {
+  const [expandedId, setExpandedId] = useState<number | null>(null);
+
   const announcements = [
     {
       id: 1,
@@ -24,7 +28,8 @@ const LatestAnnouncements = () => {
       time: "09:30",
       pinned: true,
       year: "All Years",
-      color: "bg-destructive/10 text-destructive border-destructive/20"
+      color: "bg-destructive/10 text-destructive border-destructive/20",
+      full: "Full details about the midterm examination schedule, policies, and instructions."
     },
     {
       id: 2,
@@ -36,7 +41,8 @@ const LatestAnnouncements = () => {
       time: "14:15",
       pinned: false,
       year: "Years 3-7",
-      color: "bg-primary/10 text-primary border-primary/20"
+      color: "bg-primary/10 text-primary border-primary/20",
+      full: "How to access the digital library, login steps, and resource list."
     },
     {
       id: 3,
@@ -48,7 +54,8 @@ const LatestAnnouncements = () => {
       time: "11:45",
       pinned: false,
       year: "Years 4-6",
-      color: "bg-medical-green/10 text-medical-green border-medical-green/20"
+      color: "bg-medical-green/10 text-medical-green border-medical-green/20",
+      full: "Workshop agenda, registration link, and prerequisites for participation."
     },
     {
       id: 4,
@@ -60,7 +67,8 @@ const LatestAnnouncements = () => {
       time: "16:20",
       pinned: false,
       year: "Years 6-7",
-      color: "bg-secondary-accent/10 text-secondary-accent border-secondary-accent/20"
+      color: "bg-secondary-accent/10 text-secondary-accent border-secondary-accent/20",
+      full: "Submission guidelines, themes, and evaluation criteria for abstracts."
     },
     {
       id: 5,
@@ -72,7 +80,8 @@ const LatestAnnouncements = () => {
       time: "10:00",
       pinned: false,
       year: "All Years",
-      color: "bg-accent-highlight/10 text-accent-highlight border-accent-highlight/20"
+      color: "bg-accent-highlight/10 text-accent-highlight border-accent-highlight/20",
+      full: "Expected downtime details and suggested alternatives during maintenance window."
     }
   ];
 
@@ -106,7 +115,7 @@ const LatestAnnouncements = () => {
           </p>
         </div>
 
-        {/* Announcements Grid */}
+        {/* Announcements List */}
         <div className="space-y-6">
           {announcements.map((announcement, index) => (
             <Card 
@@ -142,9 +151,9 @@ const LatestAnnouncements = () => {
                 <div className="flex-1 space-y-3">
                   <div className="flex flex-col md:flex-row md:items-start justify-between gap-4">
                     <div className="space-y-2 flex-1">
-                      <h3 className="text-xl font-semibold text-foreground hover:text-primary transition-colors">
+                      <a href={`/announcements/${announcement.id}`} className="text-xl font-semibold text-foreground hover:text-primary transition-colors">
                         {announcement.title}
-                      </h3>
+                      </a>
                       <p className="text-muted-foreground leading-relaxed">
                         {announcement.content}
                       </p>
@@ -172,15 +181,40 @@ const LatestAnnouncements = () => {
                       </div>
                     </div>
 
-                    <Button 
-                      variant="ghost" 
-                      size="sm" 
-                      className="text-primary hover:text-primary-dark group"
-                    >
-                      Read More
-                      <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
-                    </Button>
+                    <div className="flex items-center gap-2">
+                      <Button 
+                        variant="ghost" 
+                        size="sm" 
+                        className="text-primary hover:text-primary-dark group"
+                        asChild
+                      >
+                        <a href={`/announcements/${announcement.id}`}>
+                          View Page
+                          <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
+                        </a>
+                      </Button>
+                      <Button 
+                        variant="outline" 
+                        size="sm" 
+                        className="glass-card-hover border-glass-border"
+                        onClick={() => setExpandedId(expandedId === announcement.id ? null : announcement.id)}
+                      >
+                        {expandedId === announcement.id ? 'Hide' : 'Read more'}
+                        <ChevronDown className={`w-4 h-4 ml-1 transition-transform ${expandedId === announcement.id ? 'rotate-180' : ''}`} />
+                      </Button>
+                    </div>
                   </div>
+
+                  {expandedId === announcement.id && (
+                    <div className="mt-4 p-4 rounded-xl border border-glass-border bg-glass-white/70">
+                      <p className="text-sm text-foreground leading-relaxed">{announcement.full}</p>
+                      <div className="mt-3 text-right">
+                        <Button asChild size="sm" className="gradient-primary">
+                          <a href={`/announcements/${announcement.id}`}>Open full page</a>
+                        </Button>
+                      </div>
+                    </div>
+                  )}
                 </div>
               </div>
             </Card>
@@ -192,9 +226,12 @@ const LatestAnnouncements = () => {
           <Button 
             size="lg" 
             className="gradient-primary shadow-float hover:shadow-glass-lg group"
+            asChild
           >
-            View All Announcements
-            <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
+            <a href="/announcements">
+              View All Announcements
+              <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
+            </a>
           </Button>
         </div>
       </div>
