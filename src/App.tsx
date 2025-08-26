@@ -9,6 +9,7 @@ import Resources from "./pages/Resources";
 import Timetable from "./pages/Timetable";
 import Admin from "./pages/Admin";
 import NotFound from "./pages/NotFound";
+import FacultyHome from "./pages/FacultyHome";
 
 const queryClient = new QueryClient();
 
@@ -20,6 +21,12 @@ const App = () => (
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Index />} />
+          {/* Faculty root site duplication */}
+          <Route path="/faculties/:slug" element={<FacultyHome />} />
+          <Route path="/faculties/:slug/courses" element={<Courses />} />
+          <Route path="/faculties/:slug/resources" element={<Resources />} />
+          <Route path="/faculties/:slug/timetable" element={<Timetable />} />
+          <Route path="/faculties/:slug/admin" element={<Admin />} />
           <Route path="/courses" element={<Courses />} />
           <Route path="/resources" element={<Resources />} />
           <Route path="/timetable" element={<Timetable />} />

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -18,8 +18,10 @@ import {
   FlaskConical,
   UserCheck
 } from "lucide-react";
+import { useFaculty } from "@/lib/faculty-context";
 
 const YearSelector = () => {
+  const { faculty } = useFaculty();
   const [selectedYear, setSelectedYear] = useState(1);
   const [selectedCycle, setSelectedCycle] = useState<'pre-clinical' | 'clinical'>('pre-clinical');
 
@@ -99,7 +101,30 @@ const YearSelector = () => {
     }
   ];
 
-  const allYears = [...preClinicalYears, ...clinicalYears];
+  const isMedicine = faculty.slug === 'medicine';
+  const specialtyYears = useMemo(() => {
+    if (!faculty.specialties || faculty.specialties.length === 0) return [] as any[];
+    // Group specialties by year, currently all provided are year 1 entries
+    const grouped: Record<number, { year: number; title: string; subtitle: string; icon: typeof Microscope; description: string; subjects: string[]; students: number; color: string }>= {};
+    for (const spec of faculty.specialties) {
+      if (!grouped[spec.year]) {
+        grouped[spec.year] = {
+          year: spec.year,
+          title: `Année ${spec.year}`,
+          subtitle: "Première année",
+          icon: Microscope,
+          description: "Spécialités disponibles en première année",
+          subjects: [],
+          students: 0,
+          color: "bg-blue-500"
+        };
+      }
+      grouped[spec.year].subjects.push(spec.name);
+    }
+    return Object.values(grouped).sort((a, b) => a.year - b.year);
+  }, [faculty]);
+
+  const allYears = isMedicine ? [...preClinicalYears, ...clinicalYears] : specialtyYears;
   const selectedYearData = allYears.find(y => y.year === selectedYear);
 
   return (
@@ -113,18 +138,28 @@ const YearSelector = () => {
           </div>
           
           <h2 className="text-3xl md:text-5xl font-bold mb-4 text-gray-900">
-            Choose Your
-            <span className="block bg-gradient-primary bg-clip-text text-transparent">
-              Medical Year
-            </span>
+            {isMedicine ? (
+              <>
+                Choose Your
+                <span className="block bg-gradient-primary bg-clip-text text-transparent">Medical Year</span>
+              </>
+            ) : (
+              <>
+                Choisissez votre
+                <span className="block bg-gradient-primary bg-clip-text text-transparent">Spécialité</span>
+              </>
+            )}
           </h2>
           
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-            Each year has its own curriculum, resources, and specialized content tailored to your level of study.
+            {isMedicine 
+              ? "Each year has its own curriculum, resources, and specialized content tailored to your level of study."
+              : "Découvrez les spécialités et parcours disponibles dans votre faculté."}
           </p>
         </div>
 
         {/* Cycle Selector */}
+        {isMedicine && (
         <div className="flex justify-center mb-12">
           <div className="bg-white rounded-2xl p-2 shadow-lg border border-gray-100">
             <div className="flex space-x-2">
@@ -153,10 +188,11 @@ const YearSelector = () => {
             </div>
           </div>
         </div>
+        )}
 
         {/* Year Selection Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4 mb-12">
-          {(selectedCycle === 'pre-clinical' ? preClinicalYears : clinicalYears).map((year, index) => (
+          {(isMedicine ? (selectedCycle === 'pre-clinical' ? preClinicalYears : clinicalYears) : allYears).map((year, index) => (
             <Button
               key={year.year}
               variant={selectedYear === year.year ? "default" : "outline"}
