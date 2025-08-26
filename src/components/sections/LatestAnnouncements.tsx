@@ -13,6 +13,7 @@ import {
   CheckCircle,
   ChevronDown
 } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const LatestAnnouncements = () => {
   const [expandedId, setExpandedId] = useState<number | null>(null);
@@ -151,9 +152,9 @@ const LatestAnnouncements = () => {
                 <div className="flex-1 space-y-3">
                   <div className="flex flex-col md:flex-row md:items-start justify-between gap-4">
                     <div className="space-y-2 flex-1">
-                      <a href={`/announcements/${announcement.id}`} className="text-xl font-semibold text-foreground hover:text-primary transition-colors">
+                      <Link to={`/announcements/${announcement.id}`} className="text-xl font-semibold text-foreground hover:text-primary transition-colors">
                         {announcement.title}
-                      </a>
+                      </Link>
                       <p className="text-muted-foreground leading-relaxed">
                         {announcement.content}
                       </p>
@@ -188,10 +189,10 @@ const LatestAnnouncements = () => {
                         className="text-primary hover:text-primary-dark group"
                         asChild
                       >
-                        <a href={`/announcements/${announcement.id}`}>
+                        <Link to={`/announcements/${announcement.id}`}>
                           View Page
                           <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
-                        </a>
+                        </Link>
                       </Button>
                       <Button 
                         variant="outline" 
@@ -210,7 +211,7 @@ const LatestAnnouncements = () => {
                       <p className="text-sm text-foreground leading-relaxed">{announcement.full}</p>
                       <div className="mt-3 text-right">
                         <Button asChild size="sm" className="gradient-primary">
-                          <a href={`/announcements/${announcement.id}`}>Open full page</a>
+                          <Link to={`/announcements/${announcement.id}`}>Open full page</Link>
                         </Button>
                       </div>
                     </div>
@@ -228,10 +229,10 @@ const LatestAnnouncements = () => {
             className="gradient-primary shadow-float hover:shadow-glass-lg group"
             asChild
           >
-            <a href="/announcements">
+            <Link to="/announcements">
               View All Announcements
               <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
-            </a>
+            </Link>
           </Button>
         </div>
       </div>

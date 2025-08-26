@@ -3,6 +3,7 @@ import Footer from "@/components/sections/Footer";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { BookOpen, GraduationCap, ArrowRight } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const mockCourses = [
 	{ id: "anatomy-101", title: "Anatomy I", year: 1, summary: "Introduction to human anatomy.", resources: 12 },
@@ -52,10 +53,10 @@ const Courses = () => {
 							</div>
 							<div className="mt-4 flex gap-3">
 								<Button asChild className="gradient-primary">
-									<a href={`/resources?course=${c.id}`}>
+									<Link to={`/resources?course=${c.id}`}>
 										Open Resources
 										<ArrowRight className="w-4 h-4 ml-1" />
-									</a>
+									</Link>
 								</Button>
 								<Button variant="outline" className="glass-card-hover border-glass-border">Open Course</Button>
 							</div>

@@ -10,6 +10,7 @@ import {
   Award,
   Clock
 } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const HeroSection = () => {
   const quickActions = [
@@ -80,9 +81,12 @@ const HeroSection = () => {
               <Button 
                 size="lg" 
                 className="gradient-primary shadow-float hover:shadow-glass-lg text-lg px-8 py-6 group"
+                asChild
               >
-                Get Started
-                <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
+                <Link to="/courses">
+						Get Started
+                  <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
+                </Link>
               </Button>
               
               <Button 
@@ -120,9 +124,9 @@ const HeroSection = () => {
             
             <div className="grid sm:grid-cols-2 gap-4">
               {quickActions.map((action, index) => (
-                <a
+                <Link
                   key={action.title}
-                  href={action.href}
+                  to={action.href}
                   className="glass-card-hover p-6 rounded-2xl group block animate-scale-in"
                   style={{ animationDelay: `${0.4 + index * 0.1}s` }}
                 >
@@ -139,7 +143,7 @@ const HeroSection = () => {
                   </p>
                   
                   <ArrowRight className="w-4 h-4 text-primary mt-3 group-hover:translate-x-1 transition-transform" />
-                </a>
+                </Link>
               ))}
             </div>
           </div>

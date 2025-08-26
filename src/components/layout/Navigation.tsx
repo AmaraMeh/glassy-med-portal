@@ -12,6 +12,7 @@ import {
   X
 } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { Link } from "react-router-dom";
 
 const Navigation = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -54,10 +55,12 @@ const Navigation = () => {
           {/* Logo */}
           <div className="flex items-center space-x-3">
             <div className="hidden md:block">
-              <h1 className="text-xl font-bold bg-gradient-primary bg-clip-text text-transparent">
-                Faculty of Medicine
-              </h1>
-              <p className="text-xs text-muted-foreground">University of Béjaïa</p>
+              <Link to="/" className="block">
+                <h1 className="text-xl font-bold bg-gradient-primary bg-clip-text text-transparent">
+                  Faculty of Medicine
+                </h1>
+                <p className="text-xs text-muted-foreground">University of Béjaïa</p>
+              </Link>
             </div>
           </div>
 
@@ -71,10 +74,10 @@ const Navigation = () => {
                 className="glass-card-hover text-foreground hover:text-primary"
                 asChild
               >
-                <a href={item.href} className="flex items-center space-x-2">
+                <Link to={item.href} className="flex items-center space-x-2">
                   <item.icon className="w-4 h-4" />
                   <span>{item.label}</span>
-                </a>
+                </Link>
               </Button>
             ))}
           </div>
@@ -130,10 +133,10 @@ const Navigation = () => {
                   asChild
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
-                  <a href={item.href} className="flex items-center space-x-3">
+                  <Link to={item.href} className="flex items-center space-x-3">
                     <item.icon className="w-4 h-4" />
                     <span>{item.label}</span>
-                  </a>
+                  </Link>
                 </Button>
               ))}
               <Button 

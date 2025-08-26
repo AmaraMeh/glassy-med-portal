@@ -15,6 +15,7 @@ import {
   Activity,
   Microscope
 } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const YearSelector = () => {
   const [selectedYear, setSelectedYear] = useState(1);
@@ -184,17 +185,23 @@ const YearSelector = () => {
 
                   {/* Action Buttons */}
                   <div className="flex flex-col sm:flex-row gap-3">
-                    <Button className="gradient-primary shadow-float">
-                      <BookOpen className="w-4 h-4 mr-2" />
-                      View Courses
+                    <Button className="gradient-primary shadow-float" asChild>
+                      <Link to="/courses">
+                        <BookOpen className="w-4 h-4 mr-2" />
+                        View Courses
+                      </Link>
                     </Button>
-                    <Button variant="outline" className="glass-card-hover border-glass-border">
-                      <Calendar className="w-4 h-4 mr-2" />
-                      Timetable
+                    <Button variant="outline" className="glass-card-hover border-glass-border" asChild>
+                      <Link to="/timetable">
+                        <Calendar className="w-4 h-4 mr-2" />
+                        Timetable
+                      </Link>
                     </Button>
-                    <Button variant="outline" className="glass-card-hover border-glass-border">
-                      <FileText className="w-4 h-4 mr-2" />
-                      Resources
+                    <Button variant="outline" className="glass-card-hover border-glass-border" asChild>
+                      <Link to="/resources">
+                        <FileText className="w-4 h-4 mr-2" />
+                        Resources
+                      </Link>
                     </Button>
                   </div>
                 </div>

@@ -3,7 +3,8 @@ import Footer from "@/components/sections/Footer";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { FileText, BookOpen, ArrowRight } from "lucide-react";
+import { FileText, BookOpen, ArrowRight, X } from "lucide-react";
+import { Link, useLocation } from "react-router-dom";
 
 const mockResources = [
 	{ id: "res-1", title: "Lecture Slides: Anatomy I - Week 1", course: "anatomy-101", type: "PDF", size: "3.2 MB" },
@@ -12,7 +13,16 @@ const mockResources = [
 	{ id: "res-4", title: "Cardiology ECG Basics (Video)", course: "cardio-401", type: "Video", size: "12 min" },
 ];
 
+function useQuery() {
+	const { search } = useLocation();
+	return new URLSearchParams(search);
+}
+
 const Resources = () => {
+	const query = useQuery();
+	const courseFilter = query.get("course");
+	const filtered = courseFilter ? mockResources.filter(r => r.course === courseFilter) : mockResources;
+
 	return (
 		<div className="min-h-screen">
 			<Navigation />
@@ -24,10 +34,18 @@ const Resources = () => {
 					</div>
 					<h1 className="text-3xl md:text-5xl font-bold">Study Resources</h1>
 					<p className="text-muted-foreground mt-2">Browse downloadable materials by course.</p>
+					{courseFilter && (
+						<div className="mt-3 inline-flex items-center gap-2 text-sm bg-primary/10 text-primary border border-primary/20 px-3 py-1 rounded-full">
+							<span>Filtered by course: {courseFilter}</span>
+							<Link to="/resources" className="inline-flex items-center">
+								<X className="w-4 h-4" />
+							</Link>
+						</div>
+					)}
 				</div>
 
 				<div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-					{mockResources.map((r, i) => (
+					{filtered.map((r, i) => (
 						<Card key={r.id} className="glass-card-hover rounded-2xl p-6 animate-scale-in" style={{animationDelay: `${i*0.05}s`}}>
 							<div className="flex items-start gap-4">
 								<div className="w-12 h-12 rounded-xl gradient-secondary flex items-center justify-center shrink-0">
@@ -44,13 +62,13 @@ const Resources = () => {
 							</div>
 							<div className="mt-4 flex gap-3">
 								<Button asChild className="gradient-primary">
-									<a href={`/resources/${r.id}`}>
+									<Link to={`/resources/${r.id}`}>
 										View Details
 										<ArrowRight className="w-4 h-4 ml-1" />
-									</a>
+									</Link>
 								</Button>
 								<Button variant="outline" className="glass-card-hover border-glass-border" asChild>
-									<a href={`/resources/${r.id}`}>Download</a>
+									<Link to={`/resources/${r.id}`}>Download</Link>
 								</Button>
 							</div>
 						</Card>
