@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Student Page Helper</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <header class="app-header">
+      <h1>Student Page Helper</h1>
+      <div class="header-actions">
+        <button id="themeToggle" title="Toggle Dark/Light">🌓</button>
+      </div>
+    </header>
+
+    <main class="container">
+      <section class="panel replies-panel">
+        <div class="panel-header">
+          <h2>Quick Replies</h2>
+          <button id="addReplyBtn" class="primary">+ Add</button>
+        </div>
+        <div class="filters">
+          <label>
+            Category:
+            <select id="categoryFilter"></select>
+          </label>
+          <input id="searchInput" type="text" placeholder="Search replies..." />
+        </div>
+        <div id="repliesList" class="list"></div>
+      </section>
+
+      <section class="panel links-panel">
+        <div class="panel-header">
+          <h2>Links & Resources</h2>
+          <button id="addLinkBtn">+ Add Link</button>
+        </div>
+        <div id="linksList" class="chips"></div>
+      </section>
+
+      <section class="panel notes-panel">
+        <div class="panel-header">
+          <h2>Post Ideas & Notes</h2>
+        </div>
+        <textarea id="notesArea" rows="6" placeholder="Write meme ideas, captions, tasks..."></textarea>
+      </section>
+
+      <section class="panel settings-panel">
+        <div class="panel-header">
+          <h2>Settings</h2>
+        </div>
+        <div class="settings-grid">
+          <label class="switch-row">
+            <input type="checkbox" id="alwaysOnTopToggle" />
+            <span>Always on top</span>
+          </label>
+          <label class="switch-row">
+            <input type="checkbox" id="autoPasteToggle" />
+            <span>Auto paste with shortcuts</span>
+          </label>
+          <label class="color-row">
+            Accent color
+            <input type="color" id="accentColorPicker" />
+          </label>
+        </div>
+        <p class="hint">
+          Tip: Use Ctrl+1..9 to paste the first 9 replies anywhere.
+        </p>
+      </section>
+    </main>
+
+    <dialog id="replyDialog">
+      <form method="dialog" id="replyForm">
+        <h3 id="replyDialogTitle">Add Reply</h3>
+        <label>
+          Text
+          <textarea id="replyText" rows="4" required></textarea>
+        </label>
+        <label>
+          Category
+          <select id="replyCategory"></select>
+        </label>
+        <div class="dialog-actions">
+          <button type="submit" class="primary">Save</button>
+          <button type="button" id="cancelReplyBtn">Cancel</button>
+        </div>
+      </form>
+    </dialog>
+
+    <dialog id="linkDialog">
+      <form method="dialog" id="linkForm">
+        <h3 id="linkDialogTitle">Add Link</h3>
+        <label>
+          Label
+          <input id="linkLabel" type="text" required />
+        </label>
+        <label>
+          URL
+          <input id="linkUrl" type="url" placeholder="https://" required />
+        </label>
+        <div class="dialog-actions">
+          <button type="submit" class="primary">Save</button>
+          <button type="button" id="cancelLinkBtn">Cancel</button>
+        </div>
+      </form>
+    </dialog>
+
+    <script src="./renderer.js"></script>
+  </body>
+  </html>
+
