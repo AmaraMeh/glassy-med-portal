@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Student Page Helper</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <header class="titlebar drag">
+      <div class="title">Student Page Helper</div>
+      <div class="window-controls no-drag">
+        <button id="minimizeBtn" aria-label="Minimize">—</button>
+        <button id="closeBtn" aria-label="Close">×</button>
+      </div>
+    </header>
+
+    <nav class="tabs no-drag">
+      <button class="tab active" data-tab="replies">Quick Replies</button>
+      <button class="tab" data-tab="links">Links</button>
+      <button class="tab" data-tab="notes">Notes</button>
+      <button class="tab" data-tab="settings">Settings</button>
+    </nav>
+
+    <main class="content">
+      <section id="tab-replies" class="tabview active">
+        <form id="replyForm" class="row">
+          <input id="replyText" type="text" placeholder="Type a quick reply…" required />
+          <input id="replyCategory" type="text" placeholder="Category (e.g., Exams)" />
+          <button type="submit">Add</button>
+        </form>
+        <div class="filter row">
+          <input id="filterCategory" type="text" placeholder="Filter by category" />
+        </div>
+        <ul id="repliesList" class="list"></ul>
+        <p class="hint">Tip: Use Ctrl/Cmd + 1…9 to paste the first replies.</p>
+      </section>
+
+      <section id="tab-links" class="tabview">
+        <form id="linkForm" class="row">
+          <input id="linkLabel" type="text" placeholder="Label (e.g., E-Minha)" required />
+          <input id="linkUrl" type="url" placeholder="https://" required />
+          <button type="submit">Add</button>
+        </form>
+        <ul id="linksList" class="list"></ul>
+      </section>
+
+      <section id="tab-notes" class="tabview">
+        <textarea id="notesArea" placeholder="Write ideas, captions, tasks…" rows="12"></textarea>
+        <div class="row spaced"><span id="saveIndicator">Saved</span></div>
+      </section>
+
+      <section id="tab-settings" class="tabview">
+        <div class="group">
+          <label>Theme</label>
+          <div class="row">
+            <label><input type="radio" name="theme" value="system" checked /> System</label>
+            <label><input type="radio" name="theme" value="light" /> Light</label>
+            <label><input type="radio" name="theme" value="dark" /> Dark</label>
+          </div>
+        </div>
+        <div class="group">
+          <label for="accentColor">Accent Color</label>
+          <input id="accentColor" type="color" value="#7c3aed" />
+        </div>
+        <div class="group">
+          <label class="row"><input id="alwaysOnTop" type="checkbox" checked /> Always on top</label>
+          <label class="row"><input id="autoPaste" type="checkbox" /> Auto paste after copy</label>
+          <p class="subtle">Auto paste uses system tools (osascript | powershell | xdotool) if available.</p>
+        </div>
+      </section>
+    </main>
+
+    <script defer src="./renderer.js"></script>
+  </body>
+  </html>
+
