@@ -1,0 +1,52 @@
+{
+  "name": "student-page-helper",
+  "version": "1.0.0",
+  "description": "Floating desktop app to manage student page quick replies, links, and notes.",
+  "productName": "Student Page Helper",
+  "main": "main.js",
+  "type": "commonjs",
+  "author": "",
+  "license": "MIT",
+  "scripts": {
+    "start": "electron .",
+    "build": "electron-builder -wl",
+    "build:win": "electron-builder -w",
+    "build:linux": "electron-builder -l"
+  },
+  "dependencies": {
+    "electron-store": "^9.0.0"
+  },
+  "devDependencies": {
+    "electron": "^30.0.0",
+    "electron-builder": "^24.9.1"
+  },
+  "build": {
+    "appId": "com.student.page.helper",
+    "productName": "Student Page Helper",
+    "files": [
+      "**/*"
+    ],
+    "directories": {
+      "buildResources": "build"
+    },
+    "asar": true,
+    "mac": {
+      "category": "public.app-category.productivity",
+      "target": [
+        "dmg"
+      ]
+    },
+    "win": {
+      "target": [
+        "nsis"
+      ]
+    },
+    "linux": {
+      "target": [
+        "AppImage"
+      ],
+      "category": "Utility"
+    }
+  }
+}
+
